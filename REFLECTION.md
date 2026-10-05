@@ -1,0 +1,7 @@
+# Workflow Reflection: Copilot & Version-Controlled BI
+
+Working with Power BI Projects (`.pbip`) and Git fundamentally shifts BI development from an opaque, binary-file workflow to an auditable software engineering lifecycle. In traditional `.pbix` workflows, mistakes require manual rollbacks or unwieldy file-naming schemes. Using granular commits for the schema, individual DAX measures, and report visual layers provided transparency, clear diff boundaries, and confidence when refactoring model logic.
+
+GitHub Copilot was effective for generating basic syntax scaffolds, particularly for standard time-intelligence templates and base table aggregations. However, it regularly struggled with DAX execution context nuances. Copilot repeatedly suggested calculations referencing fact-table columns rather than normalized dimension attributes, omitted filter preservation wrappers like `KEEPFILTERS` and `ALLSELECTED`, and neglected edge cases such as empty slicer contexts or visual subtotal rows in `RANKX`. 
+
+Documenting AI corrections enforced rigorous manual code review rather than passive acceptance of suggestions. Combining version-controlled semantic models with an AI pair-programmer establishes a reliable framework: Copilot accelerates boilerplate DAX creation, while human review and Git change-tracking safeguard analytical accuracy and enterprise modeling integrity.
