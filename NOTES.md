@@ -18,3 +18,11 @@ The raw AI suggestion used direct division, which throws #DIV/0! errors when eva
 
   Issues & Corrections:
 Copilot passed the entire unconstrained Dim_Date table instead of an explicit column reference wrapped in ALLSELECTED(). This caused running totals to reset within slicer selections. Fixed by scoping to ALLSELECTED(Dim_Date[Date]).
+
+### Measure 3: City Sales Rank
+* **Copilot Initial Suggestion:**
+  ```dax
+  City Rank = RANKX(ALL(Fact_Sales[city]), [Total Sales])
+
+  Issues & Corrections:
+Copilot attempted to rank directly on Fact_Sales[city] rather than the dimension attribute Dim_City[city], violating star schema separation. It also lacked ISINSCOPE(), which produced an unwanted #1 rank on table subtotal rows. Refactored using ALLSELECTED(Dim_City[city]) and ISINSCOPE().
