@@ -26,3 +26,11 @@ Copilot passed the entire unconstrained Dim_Date table instead of an explicit co
 
   Issues & Corrections:
 Copilot attempted to rank directly on Fact_Sales[city] rather than the dimension attribute Dim_City[city], violating star schema separation. It also lacked ISINSCOPE(), which produced an unwanted #1 rank on table subtotal rows. Refactored using ALLSELECTED(Dim_City[city]) and ISINSCOPE().
+
+### Measure 4: Cold Brew Sales Share %
+* **Copilot Initial Suggestion:**
+  ```dax
+  Cold Brew Share = CALCULATE([Total Sales], Dim_Product[item] = "Cold Brew") / [Total Sales]
+
+  Issues & Corrections:
+Standard division failed when categories other than Coffee were selected (producing NaN/errors). Added safe division via DIVIDE(..., 0) and used KEEPFILTERS so outer slicer contexts remain intact.
